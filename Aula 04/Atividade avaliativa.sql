@@ -1,6 +1,6 @@
 CREATE DATABASE atividadeavaliativa1;
 
-USE atividadeavaliativa1;
+USE atividadeavaliativa1; -- SELECT DATABASE();
 
 CREATE TABLE fornecedor(
 	fcodigo INT AUTO_INCREMENT PRIMARY KEY,
@@ -39,7 +39,13 @@ CREATE TABLE Fornecimento(
     FOREIGN KEY (fcodigo) REFERENCES fornecedor(fcodigo),
     FOREIGN KEY (pcodigo) REFERENCES peca(pcodigo)
 );
+-- Mostrar tabelas no banco de dados selecionado
+SHOW TABLES;
+
+
 -- EX 2
+SHOW CREATE TABLE projeto;
+
 ALTER TABLE `atividadeavaliativa1`.`fornecedor` 
 CHANGE COLUMN `fcodigo` `fcod` INT NOT NULL AUTO_INCREMENT ;
 
@@ -56,6 +62,8 @@ CHANGE pnome pnome VARCHAR(100),
 ADD ccod INT, 
 ADD FOREIGN KEY (ccod) REFERENCES cidade(ccod);
 
+
+-- drop foreign key projeto_ibfk_!
 ALTER TABLE Projeto
 drop cidade,
 RENAME COLUMN `icodigo` TO `ccod`;
@@ -69,4 +77,43 @@ CREATE UNIQUE INDEX idx_pcod ON peca(pcod);
 CREATE UNIQUE INDEX idx_ccod ON cidade(ccod);
 CREATE UNIQUE INDEX idx_fornecimento_idforn ON fornecimento(idfornecimento);
 
+SHOW INDEX FROM projeto;
+SHOW INDEX FROM fornecimento;
 
+/*
+ALTER TABLE fornecedor
+	ADD COLUMN fone BIGINT NOT NULL;
+    
+ALTER TABLE fornecedor
+	ADD CONSRAINT fk_ccod_fornecedor
+    FOREIGN KEY (ccod)REFERENCES cidade(ccod);
+
+SHOW CREATE TABLE fornecedor
+*/
+
+-- Cidade
+INSERT INTO cidade VALUE (11, "Limeira", "SP");
+INSERT INTO cidade VALUES
+    (12, "Xique-Xique", "BA"),
+    (13, "Rio de Janeiro", "RJ");
+
+SELECT * FROM cidade;
+
+
+-- Fornecedor
+
+INSERT INTO fornecedor VALUES
+	(null, 'Kalunga', 'Ativo', 'São Paulo'),
+    (null,'LLC Logistica', 'Ativo' , 'Curitiba'),
+    (null, 'Bees', 'Ativo', 'São José do Rio Preto'),
+    (null, 'Hayamax', 'Ativo', 'Ibiporã')
+;
+UPDATE fornecedor SET sstatus = "Ativo" WHERE fcod = 2;
+SELECT * FROM fornecedor;
+
+
+INSERT INTO peca VALUES
+	(null, "Vermelho", 1.5, "Capacitor Eletrolítico", 13)
+;
+    
+SELECT * FROM peca;
