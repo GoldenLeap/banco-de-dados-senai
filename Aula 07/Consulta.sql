@@ -1,0 +1,81 @@
+use livraria;
+-- Consulta 
+
+-- CONSULTA * TODOS OS DADOS
+SELECT * FROM Autores, Livros;
+SELECT * FROM Livros;
+
+-- Consulta por campos
+SELECT Nome_Livro FROM Livros; 
+SELECT  Nome_Autor, ID_Autor FROM AUTORES;
+
+-- Consulta por data com condição
+SELECT Quantidade, Valor_Total FROM Vendas WHERE Data_Venda >= '2025-09-21';
+
+-- consulta por ordem decrescente
+SELECT Nome_Livro, Editora FROM Livros
+ORDER BY Preco DESC;
+
+-- Crescente
+SELECT Nome_Livro, Editora FROM Livros
+ORDER BY Preco ASC;
+
+-- Consulta por limite de resultado
+
+SELECT nome_livro FROM LIVROS limit 5;
+
+-- Renomear colunas com AS
+SELECT Nome_Livro AS NOME, AUTOR AS ESCRITOR FROM LIVROS;
+
+-- Funções agregadas
+SELECT COUNT(*) AS Total_Livros
+FROM Livros;
+
+SELECT SUM(PRECO) AS Total_Preco
+FROM Livros;
+
+SELECT AVG(PRECO) AS Media_Livros
+FROM Livros;
+
+-- Agrupamentos com group by
+SELECT AUTOR, COUNT(*) AS QUANTIDADE
+FROM LIVROS
+GROUP BY AUTOR
+HAVING QUANTIDADE >= 1;
+
+
+-- USO DE AND OU OR
+SELECT NOME_LIVRO, PRECO FROM LIVROS
+WHERE Nome_Livro = "Iracema" AND PRECO > 10;
+
+
+-- CONDIÇÕES EXTRAS COM GROUP BY, HAVING E 
+-- ORDER BY
+
+SELECT ID_Livro, COUNT(*) AS TOTAL_LIVROS
+FROM LIVROS
+GROUP BY AUTOR
+HAVING TOTAL_LIVROS > 1
+ORDER BY TOTAL_LIVROS DESC;
+
+
+-- USO DO LIKE
+SELECT NOME_LIVRO FROM LIVROS
+WHERE NOME_LIVRO LIKE '%Iracema%';
+
+-- USO DO LIKE COM INICIO POR LETRA
+SELECT NOME_LIVRO FROM LIVROS
+WHERE NOME_LIVRO LIKE 'I%';
+
+-- USO DO LIKE COM TERMINO POR LETRA
+SELECT NOME_LIVRO FROM LIVROS
+WHERE NOME_LIVRO LIKE '%a';
+
+-- USO DO LIKE POR QUANTIDADE DE LETRAS
+SELECT NOME_LIVRO FROM LIVROS
+WHERE NOME_LIVRO LIKE 'I_____a';
+
+-- COMBINANDO SITUAÇÕES
+SELECT NOME_LIVRO, PRECO FROM LIVROS
+WHERE NOME_LIVRO LIKE '%A'
+ORDER BY PRECO DESC;
