@@ -1,9 +1,11 @@
 CREATE DATABASE Techfit CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 
+USE Techfit;
+
 CREATE TABLE Usuarios (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(100) NOT NULL,
-    tipo ENUM('usuario', 'funcionario') NOT NULL,
+    tipo ENUM('aluno', 'funcionario') NOT NULL,
     senha_hash VARCHAR(255) NOT NULL
 );
 
