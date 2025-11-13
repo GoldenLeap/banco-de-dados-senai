@@ -1,11 +1,12 @@
-CREATE DATABASE Techfit CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 
+CREATE DATABASE Techfit CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
 USE Techfit;
 
 CREATE TABLE Usuarios (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(100) NOT NULL,
     tipo ENUM('aluno', 'funcionario') NOT NULL,
+    avatar VARCHAR(255) DEFAULT  'https://placehold.co/600x400',
     senha_hash VARCHAR(255) NOT NULL
 );
 
@@ -13,7 +14,6 @@ CREATE TABLE Alunos (
     id_aluno INT AUTO_INCREMENT PRIMARY KEY,
     nome_aluno VARCHAR(100) NOT NULL,
     genero VARCHAR(8) NOT NULL,
-    data_agendamento DATE NOT NULL,
     data_nascimento DATE NOT NULL,
     endereco TEXT NOT NULL,
     telefone VARCHAR(19) NOT NULL,
@@ -53,10 +53,18 @@ CREATE TABLE Aulas (
     id_funcionario INT NOT NULL,
     id_modalidade INT NOT NULL,
     id_filial INT NOT NULL,
+    vagas INT NOT NULL,
+    descricao VARCHAR(255) NOT NULL, 
     FOREIGN KEY(id_funcionario) REFERENCES Funcionarios(id_funcionario),
     FOREIGN KEY(id_modalidade) REFERENCES Modalidades(id_modalidade),
     FOREIGN KEY(id_filial) REFERENCES Filiais(id_filial)
 );
+SELECT * FROM MODALIDADES;
+
+
+
+
+
 
 CREATE TABLE Aulas_Aluno (
     id_aula INT NOT NULL,
@@ -65,7 +73,16 @@ CREATE TABLE Aulas_Aluno (
     FOREIGN KEY(id_aula) REFERENCES Aulas(id_aula),
     FOREIGN KEY(id_aluno) REFERENCES Alunos(id_aluno)
 );
-
+SELECT 
+		M.nome_modalidade,
+		A.id_modalidade,
+		AA.id_aula
+		FROM 
+			Aulas_Aluno AS AA
+		INNER JOIN Aulas AS A ON AA.id_aula = A.id_aula
+		INNER JOIN Modalidades AS M ON A.id_modalidade = M.id_modalidade
+		WHERE 
+			AA.id_aluno = 1;
 CREATE TABLE Treinos (
     id_treino INT AUTO_INCREMENT PRIMARY KEY,
     nome_treino VARCHAR(50) NOT NULL,
@@ -136,7 +153,7 @@ CREATE TABLE Planos (
     id_plano INT AUTO_INCREMENT PRIMARY KEY,
     nome_plano VARCHAR(100) NOT NULL,
     descricao_plano VARCHAR(255) NOT NULL,
-    preco DECIMAL(5,2) NOT NULL,
+    preco DECIMAL(9,2) NOT NULL,
     duracao INT NOT NULL
 );
 

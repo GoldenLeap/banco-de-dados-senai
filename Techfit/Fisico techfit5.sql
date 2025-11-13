@@ -48,11 +48,14 @@ CREATE TABLE Filiais (
 
 CREATE TABLE Aulas (
     id_aula INT AUTO_INCREMENT PRIMARY KEY,
+    nome_aula VARCHAR(255) NOT NULL,
     dia_aula DATE NOT NULL,
     quantidade_pessoas INT NOT NULL,
+    descricao TEXT NOT NULL,
     id_funcionario INT NOT NULL,
     id_modalidade INT NOT NULL,
     id_filial INT NOT NULL,
+    
     FOREIGN KEY (id_funcionario) REFERENCES Funcionarios (id_funcionario),
     FOREIGN KEY (id_modalidade) REFERENCES Modalidades (id_modalidade),
     FOREIGN KEY (id_filial) REFERENCES Filiais (id_filial)
@@ -192,6 +195,7 @@ CREATE TABLE Agendamento (
     FOREIGN KEY (id_aula) REFERENCES Aulas (id_aula),
     FOREIGN KEY (id_aluno) REFERENCES Alunos (id_aluno)
 );
+
 
 -- Indexes para o agendamento
 CREATE INDEX idx_agendamento_aluno ON Agendamento (id_aluno);

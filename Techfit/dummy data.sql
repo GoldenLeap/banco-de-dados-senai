@@ -59,13 +59,14 @@ VALUES
 
 -- 8. Aulas (Depende de Funcionarios, Modalidades, Filiais)
 -- (Bruno=1, Yoga=2, Centro=1)
-INSERT INTO Aulas (dia_aula, quantidade_pessoas, id_funcionario, id_modalidade, id_filial)
+INSERT INTO Aulas (nome_aula, descricao, dia_aula, quantidade_pessoas, id_funcionario, id_modalidade, id_filial)
 VALUES
-('2025-11-15', 20, 1, 2, 1); -- Aula de Yoga c/ Bruno na Filial Centro
+('Yoga do Equilíbrio Interior', 'Nesta aula, o foco será restaurar o equilíbrio tanto físico quanto mental. A prática combina posturas que ativam o corpo de maneira suave, alongando e fortalecendo os músculos, enquanto técnicas de respiração ajudam a acalmar a mente e reduzir o estresse. Ideal para quem busca maior estabilidade emocional e um momento de introspecção.', '2025-11-15', 20, 1, 2, 1); -- Aula de Yoga c/ Bruno na Filial Centro
 -- (Bruno=1, Crossfit=3, Norte=2)
-INSERT INTO Aulas (dia_aula, quantidade_pessoas, id_funcionario, id_modalidade, id_filial)
+INSERT INTO Aulas (nome_aula, descricao, dia_aula, quantidade_pessoas, id_funcionario, id_modalidade, id_filial)
 VALUES
-('2025-11-16', 15, 1, 3, 2); -- Aula de Crossfit c/ Bruno na Filial Norte
+('Força e Resistência
+', 'Nesta aula, o objetivo é desenvolver tanto a força quanto a resistência muscular, através de exercícios que desafiam seu corpo de maneira intensa e eficiente. Usaremos uma combinação de levantamento de pesos, exercícios aeróbicos e movimentos funcionais, sempre priorizando a técnica e o controle. Prepare-se para aumentar sua capacidade de esforço e superar seus próprios limites!', '2025-11-16', 15, 1, 3, 2); -- Aula de Crossfit c/ Bruno na Filial Norte
 
 -- 9. Aulas_Aluno (Junction: Aulas, Alunos)
 -- (Ana=1 na Aula de Yoga=1)
@@ -142,6 +143,7 @@ VALUES
 INSERT INTO Planos_Aluno (id_aluno, id_plano, data_inicio, data_fim, status)
 VALUES
 (1, 2, '2025-11-05', '2026-11-05', 'ativo');
+
 -- (Carla=2 tem o Plano Básico=1)
 INSERT INTO Planos_Aluno (id_aluno, id_plano, data_inicio, data_fim, status)
 VALUES
