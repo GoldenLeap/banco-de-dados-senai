@@ -1,7 +1,7 @@
 <?php
     class Servicos{
         static public function GetServicos(){
-            $db = Connect::Connect();
+            $db = Connect::conectar();
             $sql = "SELECT * FROM SERVICOS";
             $sql = $db->prepare($sql);
             $sql->execute();

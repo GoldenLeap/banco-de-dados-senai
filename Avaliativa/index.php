@@ -1,13 +1,8 @@
 <?php
-function autoload($file)
-{
-    include __DIR__ . '\models/' . $file . ".php";
-}
-spl_autoload_register('autoload');
 
-require_once "./controllers/homeController.php";
-require_once "./controllers/servicoController.php";
-
+require_once 'helpers/viewHelper.php';
+import_models();
+import_controllers();
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 switch ($uri) {
@@ -16,6 +11,12 @@ switch ($uri) {
         break;
     case "/servicos":
         servicoController();
+        break;
+    case "/estoque":
+        estoqueController();
+        break;
+    case "/clientes":
+        clientesController();
         break;
     default:
         echo "Bla";

@@ -1,4 +1,3 @@
-<body>
     <header>
         <h1>Oficina Mecânica XYZ</h1>
         <nav>
@@ -44,4 +43,3 @@
     <footer>
         <p>&copy; 2025 . Todos os direitos reservados.</p>
     </footer>
-</body>
