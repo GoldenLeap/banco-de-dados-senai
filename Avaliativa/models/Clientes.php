@@ -42,4 +42,10 @@ class Cliente{
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$id]);
     }
+    public static function addCliente($cpf, $nome, $telefone){
+        $pdo = self::getPDO();
+        $sql = "INSERT INTO Clientes(CPF, Nome_cliente, Telefone) VALUES(?, ?, ?);";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$cpf, $nome, $telefone]);
+    }
 }

@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <nav>
+        <a href="/">Inicio</a>
+    </nav>
     <?=$conteudo?>   
 </body>
 </html>

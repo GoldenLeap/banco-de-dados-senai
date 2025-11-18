@@ -9,13 +9,17 @@ function clientesController()
     ];
     switch ($action) {
         case "edit":
-            $data["clientsEdit"] = edit();
+            $data["clienteEdit"] = edit();
             break;
         case "editPost":
             update();
             break;
         case "delete":
             Cliente::deleteCliente($_GET["id"]);
+            header("location: /clientes");
+            break;
+        case "add":
+            addClient();    
             break;
         default:
             $data[""] = "";
@@ -33,4 +37,8 @@ function update(){
     Cliente::setClienteName($_POST["id"],$_POST["nome_cliente"]);
     Cliente::setClienteTelefone($_POST["id"],$_POST["telefone"]);
     header("location: /clientes");
+}
+function addClient(){
+    Cliente::addCliente($_POST['cpf'], $_POST['nome_cliente'], $_POST['telefone']);
+    header('location: /clientes');
 }
