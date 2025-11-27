@@ -1,9 +1,10 @@
-INSERT INTO Usuarios (cpf, email, tipo, senha_hash, avatar)
+-- 1. Usuários
+INSERT INTO Usuarios (nome, cpf, email, tipo, senha_hash, avatar)
 VALUES
-('123.456.789-00', 'ana.silva@email.com', 'aluno', '202cb962ac59075b964b07152d234b70', DEFAULT),
-('111.222.333-44', 'bruno.costa@techfit.com', 'funcionario', '202cb962ac59075b964b07152d234b70', DEFAULT),
-('222.333.444-55', 'carla.dias@email.com', 'aluno', '202cb962ac59075b964b07152d234b70', DEFAULT),
-('555.666.777-88', 'daniel.moreira@techfit.com', 'funcionario', '202cb962ac59075b964b07152d234b70', DEFAULT);
+('Ana Silva', '123.456.789-00', 'ana.silva@email.com', 'aluno', '202cb962ac59075b964b07152d234b70', DEFAULT),
+('Bruno Costa', '111.222.333-44', 'bruno.costa@techfit.com', 'funcionario', '202cb962ac59075b964b07152d234b70', DEFAULT),
+('Carla Dias', '222.333.444-55', 'carla.dias@email.com', 'aluno', '202cb962ac59075b964b07152d234b70', DEFAULT),
+('Daniel Moreira', '555.666.777-88', 'daniel.moreira@techfit.com', 'funcionario', '202cb962ac59075b964b07152d234b70', DEFAULT);
 
 -- 2. Modalidades
 INSERT INTO Modalidades (nome_modalidade, descricao)
@@ -33,22 +34,22 @@ VALUES
 (50, 'Camiseta Techfit M');
 
 -- 6. Alunos
-INSERT INTO Alunos (nome_aluno, genero, data_nascimento, endereco, telefone, codigo_acesso, id_usuario)
+INSERT INTO Alunos (genero, data_nascimento, endereco, telefone, codigo_acesso, id_usuario)
 VALUES
-('Ana Silva', 'Feminino', '1995-03-15', 'Rua das Flores, 10', '(11) 98888-1111', 'ANA2025', 1),
-('Carla Dias', 'Feminino', '2000-11-20', 'Avenida da Paz, 20', '(11) 97777-2222', 'CARLA2025', 3);
+('Feminino', '1995-03-15', 'Rua das Flores, 10', '(11) 98888-1111', 'ANA2025', 1),
+('Feminino', '2000-11-20', 'Avenida da Paz, 20', '(11) 97777-2222', 'CARLA2025', 3);
 
--- 7. Funcionarios
-INSERT INTO Funcionarios (nome_funcionario, salario, carga_horaria, cargo, id_usuario)
+-- 7. Funcionários
+INSERT INTO Funcionarios (salario, carga_horaria, cargo, id_usuario)
 VALUES
-('Bruno Costa', 3500.00, 40, 'Instrutor', 2),
-('Daniel Moreira', 6000.00, 44, 'Gerente', 4);
+(3500.00, 40, 'Instrutor', 2),
+(6000.00, 44, 'Gerente', 4);
 
 -- 8. Aulas
 INSERT INTO Aulas (nome_aula, descricao, dia_aula, quantidade_pessoas, id_funcionario, id_modalidade, id_filial)
 VALUES
-('Yoga do Equilíbrio Interior', 'Foco em equilíbrio físico e mental com posturas e respiração.', '2025-11-15', 20, 1, 2, 1),
-('Força e Resistência', 'Treino intenso de força e resistência com pesos e exercícios funcionais.', '2025-11-16', 15, 1, 3, 2);
+('Yoga do Equilíbrio Interior', 'Foco em equilíbrio físico e mental com posturas e respiração.', '2025-11-15', 20, 2, 2, 1),
+('Força e Resistência', 'Treino intenso de força e resistência com pesos e exercícios funcionais.', '2025-11-16', 15, 2, 3, 2);
 
 -- 9. Aulas_Aluno
 INSERT INTO Aulas_Aluno (id_aula, id_aluno)
@@ -60,14 +61,14 @@ VALUES
 -- 10. Treinos
 INSERT INTO Treinos (nome_treino, descricao, dia_treino, id_aluno, id_funcionario)
 VALUES
-('Treino A - Foco em Pernas', 'Agachamento, Leg Press, Extensora.', '2025-11-12', 1, 1),
-('Treino B - Foco em Superiores', 'Supino, Puxada, Rosca Direta.', '2025-11-13', 2, 1);
+('Treino A - Foco em Pernas', 'Agachamento, Leg Press, Extensora.', '2025-11-12', 1, 2),
+('Treino B - Foco em Superiores', 'Supino, Puxada, Rosca Direta.', '2025-11-13', 2, 2);
 
--- 11. Avaliacoes
+-- 11. Avaliações
 INSERT INTO Avaliacoes (comentarios, nota, id_aluno, id_funcionario)
 VALUES
-('O Bruno é um ótimo instrutor, muito atencioso!', 9.5, 1, 1),
-('A aula de Crossfit foi incrível, mas muito pesada.', 8.0, 2, 1);
+('O Bruno é um ótimo instrutor, muito atencioso!', 9.5, 1, 2),
+('A aula de Crossfit foi incrível, mas muito pesada.', 8.0, 2, 2);
 
 -- 12. Suporte
 INSERT INTO Suporte (ticket, status, categoria_suporte, descricao_suporte, id_aluno)
@@ -78,7 +79,7 @@ VALUES
 INSERT INTO Avisos (titulo, tipo, conteudo, expira, data_criacao, id_funcionario)
 VALUES
 ('Manutenção Piscina', 'Manutencao', 'Piscina da Filial Centro fechada em 20/11.', '2025-11-21', '2025-11-12', 2),
-('Black Friday Techfit!', 'Promocao', 'Descontos de 50% na anuidade do Plano Premium!', '2025-11-30', '2025-11-10', 2);
+('Black Friday Techfit!', 'Promocao', 'Descontos de 50% na anuidade do Plano Premium!', '2025-11-30', '2025-11-10', 1);
 
 -- 14. Pagamentos
 INSERT INTO Pagamentos (status, data_pagamento, valor, metodo_pagamento, id_aluno)
