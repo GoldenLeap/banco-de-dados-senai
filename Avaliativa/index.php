@@ -18,6 +18,9 @@ switch ($uri) {
     case "/clientes":
         clientesController();
         break;
+    case "/veiculos":
+        veiculoController();
+        break;
     default:
         echo "Bla";
         break;
