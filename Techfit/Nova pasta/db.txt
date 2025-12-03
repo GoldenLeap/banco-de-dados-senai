@@ -1,32 +1,32 @@
-drop database techfit;
+drop database if exists techfit;
 CREATE DATABASE Techfit;
 USE Techfit;
 
 CREATE TABLE Usuarios (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL,
     email VARCHAR(100) NOT NULL,
-    cpf VARCHAR(16) NOT NULL UNIQUE,
-    data_nascimento DATE,
     tipo ENUM('aluno', 'funcionario') NOT NULL,
     senha_hash VARCHAR(255) NOT NULL,
-    avatar VARCHAR(255) NOT NULL DEFAULT '/images/upload/pfp/avatar.png'
+    avatar VARCHAR(255) NOT NULL DEFAULT 'images/upload/pfp/avatar.png'
 );
 
 CREATE TABLE Alunos (
     id_aluno INT AUTO_INCREMENT PRIMARY KEY,
+    nome_aluno VARCHAR(100) NOT NULL,
     genero VARCHAR(20) NOT NULL,
+    data_nascimento DATE NOT NULL,
     endereco TEXT NOT NULL,
     telefone VARCHAR(19) NOT NULL,
     codigo_acesso VARCHAR(100) UNIQUE,
     id_usuario INT NOT NULL,
     FOREIGN KEY (id_usuario) REFERENCES Usuarios (id_usuario)
 );
-
 CREATE TABLE Funcionarios (
     id_funcionario INT AUTO_INCREMENT PRIMARY KEY,
+    nome_funcionario VARCHAR(100) NOT NULL,
     salario DECIMAL(8, 2) NOT NULL,
     carga_horaria INT NOT NULL,
+    cpf_funcionario VARCHAR(16) NOT NULL,
     cargo VARCHAR(50) NOT NULL,
     id_usuario INT NOT NULL,
     FOREIGN KEY (id_usuario) REFERENCES Usuarios (id_usuario)
@@ -73,8 +73,8 @@ CREATE TABLE Treinos (
     nome_treino VARCHAR(50) NOT NULL,
     descricao VARCHAR(255) NOT NULL,
     dia_treino DATE NOT NULL,
-    id_aluno INT NOT NULL,        
-    id_funcionario INT NOT NULL,  
+    id_aluno INT NOT NULL,        -- Para quem é este treino?
+    id_funcionario INT NOT NULL,  -- Quem criou este treino?
     FOREIGN KEY (id_aluno) REFERENCES Alunos (id_aluno),
     FOREIGN KEY (id_funcionario) REFERENCES Funcionarios (id_funcionario)
 );
@@ -114,8 +114,8 @@ CREATE TABLE Avisos (
     conteudo TEXT NOT NULL,
     expira DATE NOT NULL,
     data_criacao DATE NOT NULL,
-    anexo_path VARCHAR(255) DEFAULT NULL,
     id_funcionario INT NOT NULL,
+	anexo_path VARCHAR(255) NULL,
     FOREIGN KEY (id_funcionario) REFERENCES Funcionarios (id_funcionario)
 );
 
@@ -222,7 +222,7 @@ CREATE INDEX idx_alunos_codigo_acesso ON Alunos (codigo_acesso);
 -- index para funcionarios
 CREATE INDEX idx_funcionarios_usuario ON Funcionarios (id_usuario);
 
-CREATE INDEX idx_usuarios_cpf ON Usuarios (cpf);
+CREATE INDEX idx_funcionarios_cpf ON Funcionarios (cpf_funcionario);
 
 -- index modalidades
 CREATE UNIQUE INDEX idx_modalidades_nome ON Modalidades (nome_modalidade);
